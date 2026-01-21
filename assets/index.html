@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VM Monitor</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>VM monitor</h1>
+            <div class="status-indicator">
+                <div class="dot"></div>
+                <span>System operational</span>
+            </div>
+        </header>
+
+        <div class="dashboard">
+            <!-- CPU Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="icon">🧠</div>
+                    <div class="card-title">
+                        CPU Usage
+                        <div id="cpu-model"
+                            style="font-size: 0.8rem; font-weight: 400; color: var(--text-secondary); margin-top: 0.2rem;">
+                            -</div>
+                        <div id="cpu-cores"
+                            style="font-size: 0.75rem; font-weight: 400; color: var(--text-secondary); margin-top: 0.1rem;">
+                            -</div>
+                    </div>
+                </div>
+                <div class="metric-value">
+                    <span id="cpu-val">0</span><span class="metric-unit">%</span>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar" id="cpu-bar"></div>
+                </div>
+            </div>
+
+            <!-- Memory Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="icon">💾</div>
+                    <div class="card-title">
+                        Memory
+                        <div id="mem-type"
+                            style="font-size: 0.8rem; font-weight: 400; color: var(--text-secondary); margin-top: 0.2rem;">
+                            -</div>
+                    </div>
+                </div>
+                <div class="metric-value">
+                    <span id="mem-val">0</span><span class="metric-unit">%</span>
+                </div>
+                <div class="metric-detail">
+                    <span id="mem-used">0 GB</span> / <span id="mem-total">0 GB</span>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar" id="mem-bar"></div>
+                </div>
+            </div>
+
+            <!-- Disk Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="icon">💿</div>
+                    <div class="card-title">
+                        Disk (Root)
+                        <div id="disk-fstype"
+                            style="font-size: 0.8rem; font-weight: 400; color: var(--text-secondary); margin-top: 0.2rem;">
+                            -</div>
+                    </div>
+                </div>
+                <div class="metric-value">
+                    <span id="disk-val">0</span><span class="metric-unit">%</span>
+                </div>
+                <div class="metric-detail">
+                    <span id="disk-used">0 GB</span> / <span id="disk-total">0 GB</span>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar" id="disk-bar"></div>
+                </div>
+            </div>
+
+            <!-- Network Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="icon">🌐</div>
+                    <div class="card-title">Network I/O</div>
+                </div>
+                <div class="metric-detail" style="margin-top: 0; flex-direction: column; gap: 1rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span>⬇️ In</span>
+                        <div><span id="net-in" style="font-weight: 700; color: var(--text-primary);">0</span></div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span>⬆️ Out</span>
+                        <div><span id="net-out" style="font-weight: 700; color: var(--text-primary);">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Processes Section -->
+        <h2 style="margin-top: 3rem; margin-bottom: 1rem; color: var(--text-secondary); font-size: 1.5rem;">Top
+            processes (20)</h2>
+        <div class="card" style="overflow-x: auto; padding: 1rem;">
+            <table class="process-table">
+                <thead>
+                    <tr>
+                        <th onclick="sortTable('pid')">PID</th>
+                        <th onclick="sortTable('name')">Name</th>
+                        <th onclick="sortTable('cpu')">CPU %</th>
+                        <th onclick="sortTable('mem')">Memory %</th>
+                    </tr>
+                </thead>
+                <tbody id="process-list">
+                    <!-- Rows will be populated by JS -->
+                </tbody>
+            </table>
+        </div>
+
+        <footer
+            style="margin-top: 2rem; text-align: center; color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 2rem;">
+            You can always view it in <a href="/api.json" target="_blank"
+                style="color: var(--accent-color); text-decoration: none;">json</a> format.
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
